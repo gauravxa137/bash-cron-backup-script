@@ -2,7 +2,8 @@
 Scripting Project for IBM Linux Course
 
 type : 'crontab -e' in your terminal and add this to the last line 
-   " 0 0 * * * /usr/local/bin/backup.sh /home/project/important-documents  /home/project "
+
+" 0 0 * * * /usr/local/bin/backup.sh /home/project/important-documents  /home/project "
 
   1. my backup script directory : " /usr/local/bin/backup.sh " 
   change this path accordingly 
