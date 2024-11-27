@@ -1,17 +1,39 @@
 # Automated Backup Script
-This project aims to automate the process of backing up encrypted password files at ABC International Inc. The current manual process is time-consuming, prone to human errors, and compromises security. As the lead Linux developer at ABC, I created a script that will run daily and automatically back up any encrypted password files that have been updated within the last 24 hours.
+This is a project on linux commands and shell scripting as part of IBM Data Enginnering Professional Certificate.
 
+The scenario of the project is below:
 
-type : 'crontab -e' in your terminal and add this to the last line 
+You are a lead linux developer at the top-tech company "ABC International INC." ABC currently suffers from a huge bottleneck - each day, interns must painstakingly access encrypted password files on core servers, and backup those that were updated within the last 24-hours. This introduces human error, lowers security, and takes an unreasonable amount of work. As ABC INC's most trusted linux developer, you have been tasked with creating a script backup.sh which automatically backs up any of these files that have been updated within the past 24 hours.
 
-" 0 0 * * * /usr/local/bin/backup.sh /home/project/important-documents  /home/project "
+After the backup.sh script is created, the following codes are run in the terminal.
 
-  1. my backup script directory : " /usr/local/bin/backup.sh " 
-  change this path accordingly 
+#To make the script executable
 
-  2. Path of the documents to be backed up : " /home/project/important-documents "
+chmod u+x backup.sh
+#Verification that the file is executable
 
-  3. path of the backed up files. all the files will be archived in this folder : " /home/project "
+ls -l backup.sh
+#This is a zip file to be downloaded
 
-  4. the file name format is : 'DATE-FOLERNAME".TAR.GZ
-     
+wget https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork/labs/Final%20Project/important-documents.zip
+#Unzip the archive file
+
+unzip -DDo important-documents.zip
+#Update the file's last modified date to now
+
+touch important-documents/*
+#Test the script to create a file called backup-[CURRENT_TIMESTAMP].tar.gz in the current directory
+
+./backup.sh important-documents .
+#Copy backup.sh into the /usr/local/bin/ directory
+
+sudo cp backup.sh /usr/local/bin/
+#Open crontab editor
+
+crontab -e
+#Schedule the /usr/local/bin/backup.sh script to backup the important-documents folder every 24 hours to the home directory (~)
+
+0 0 * * * /usr/bin/backup.sh ~/important-documents ~
+#List all cron jobs
+
+crontab -l
